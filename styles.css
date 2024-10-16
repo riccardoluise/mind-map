@@ -1,0 +1,36 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#controls {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+}
+#controls button {
+    margin-right: 5px;
+}
+#mindmap {
+    width: 100%;
+    height: 100%;
+}
+.node circle {
+    cursor: pointer;
+}
+.node text {
+    font-family: Arial, sans-serif;
+    pointer-events: none;
+}
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+.node-label-background {
+    fill: white;
+    opacity: 0.8;
+}

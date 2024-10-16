@@ -5,44 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Development Mind Map</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        #controls {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            z-index: 1000;
-        }
-        #controls button {
-            margin-right: 5px;
-        }
-        #mindmap {
-            width: 100%;
-            height: 100%;
-        }
-        .node circle {
-            cursor: pointer;
-        }
-        .node text {
-            font-family: Arial, sans-serif;
-            pointer-events: none;
-        }
-        .link {
-            fill: none;
-            stroke: #ccc;
-            stroke-width: 1.5px;
-        }
-        .node-label-background {
-            fill: white;
-            opacity: 0.8;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="controls">
@@ -54,7 +17,11 @@
         <button id="fit-view">Adatta alla Finestra</button>
     </div>
     <div id="mindmap"></div>
-    <script src="data.js"></script>
+    <script src="mindMapData.js"></script>
+    <script src="d3Setup.js"></script>
+    <script src="nodeFunctions.js"></script>
+    <script src="visualization.js"></script>
+    <script src="controls.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
