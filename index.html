@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Mind Map</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+        #controls button {
+            margin-right: 5px;
+        }
+        #mindmap {
+            width: 100%;
+            height: 100%;
+        }
+        .node circle {
+            cursor: pointer;
+        }
+        .node text {
+            font-family: Arial, sans-serif;
+            pointer-events: none;
+        }
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 1.5px;
+        }
+        .node-label-background {
+            fill: white;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <button id="zoom-in">+</button>
+        <button id="zoom-out">-</button>
+        <button id="expand-all">Espandi tutti</button>
+        <button id="collapse-all">Collassa tutti</button>
+    </div>
+    <div id="mindmap"></div>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
