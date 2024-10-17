@@ -10,7 +10,7 @@ function parseGitignore(rootPath) {
       .map(line => line.trim())
       .filter(line => line && !line.startsWith('#'));
   }
-  patterns.push('node_modules', '.git');
+  patterns.push('node_modules', '.git', 'README.md', 'concatenate.js');
   return patterns;
 }
 
@@ -46,8 +46,7 @@ function walkSync(dir, ignorePatterns, rootPath, filelist = []) {
 
 function generateDirectoryTree(rootPath, ignorePatterns) {
   function buildTree(dir) {
-    const baseName = path.basename(dir);
-    const tree = { name: baseName, type: 'directory', children: [] };
+    const tree = { type: 'directory', children: [] };
     const files = fs.readdirSync(dir);
 
     files.forEach(file => {
@@ -61,7 +60,7 @@ function generateDirectoryTree(rootPath, ignorePatterns) {
       if (fs.statSync(filePath).isDirectory()) {
         tree.children.push(buildTree(filePath));
       } else {
-        tree.children.push({ name: file, type: 'file', path: relativePath });
+        tree.children.push({ type: 'file', path: relativePath });
       }
     });
 
@@ -77,7 +76,7 @@ function concatenateFiles(rootPath) {
   let output = '';
 
   output += "# Project Files Summary\n\n";
-  output += "This document contains the content of all project files, excluding those specified in .gitignore, node_modules, and .git.\n\n";
+  output += "This document contains the content of all project files, excluding those specified in .gitignore, node_modules, .git, README.md, and concatenate.js.\n\n";
   
   output += "## Directory Structure\n\n";
   output += "```json\n";
