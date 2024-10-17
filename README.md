@@ -14,6 +14,7 @@
     }
 
 3)  npm install && npm start
-https://stackblitz.com/~/github.com/riccardoluise/mind-map?file=README.md
 
-4) GitHub Pages - Settings - Source -  root - Save
+4) https://stackblitz.com/~/github.com/riccardoluise/mind-map?file=README.md
+
+5) GitHub Pages - Settings - Source -  root - Save
