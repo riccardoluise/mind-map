@@ -17,9 +17,16 @@
         <button id="fit-view">Adatta alla Finestra</button>
     </div>
     <div id="mindmap"></div>
+
+    <!-- Include the new scripts in the correct order -->
+    <script src="src/globalVariables.js"></script>
     <script src="src/utils/d3Setup.js"></script>
     <script src="src/utils/nodeFunctions.js"></script>
-    <script src="src/services/visualization.js"></script>
+    <script src="src/services/dataLoader.js"></script>
+    <script src="src/services/simulation.js"></script>
+    <script src="src/components/nodeRenderer.js"></script>
+    <script src="src/services/update.js"></script>
+    <script src="src/components/initializeVisualization.js"></script>
     <script src="src/components/MindMap/controls.js"></script>
     <script src="src/components/MindMap/MindMap.js"></script>
 </body>
