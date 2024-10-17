@@ -15,13 +15,13 @@ const filter = defs.append("filter")
 
 filter.append("feGaussianBlur")
     .attr("in", "SourceAlpha")
-    .attr("stdDeviation", 5)
+    .attr("stdDeviation", 3)
     .attr("result", "blur");
 
 filter.append("feOffset")
     .attr("in", "blur")
-    .attr("dx", 3)
-    .attr("dy", 3)
+    .attr("dx", 2)
+    .attr("dy", 2)
     .attr("result", "offsetBlur");
 
 const feMerge = filter.append("feMerge");
@@ -41,9 +41,8 @@ const zoom = d3.zoom()
 
 svg.call(zoom);
 
-const colorScale = d3.scaleLinear()
-    .domain([0, 5])
-    .range(["#8A2BE2", "#FFFFFF"]);
+const colorScale = d3.scaleSequential(d3.interpolateYlGnBu)
+    .domain([5, 0]);
 
 const radiusScale = d3.scaleLinear()
     .domain([0, 5])

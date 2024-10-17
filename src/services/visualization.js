@@ -35,26 +35,34 @@ function initializeVisualization() {
         .attr("fill", d => colorScale(d.depth))
         .style("filter", d => d.depth === 0 ? "url(#drop-shadow)" : null)
         .style("stroke", getBorderColor)
-        .style("stroke-width", 3);
+        .style("stroke-width", 2);
 
-    node.append("rect")
-        .attr("class", "node-label-background")
-        .attr("rx", 5)
-        .attr("ry", 5);
-
+    // Append text first
     node.append("text")
         .attr("class", "node-label")
         .attr("dy", ".31em")
         .attr("text-anchor", "middle")
         .text(d => d.data.name)
-        .each(function(d) {
-            const bbox = this.getBBox();
-            d3.select(this.previousSibling)
-                .attr("x", bbox.x - 5)
-                .attr("y", bbox.y - 2)
-                .attr("width", bbox.width + 10)
-                .attr("height", bbox.height + 4);
-        });
+        .style("font-size", d => `${Math.max(10, 16 - d.depth * 2)}px`);
+
+    // Append rect after text
+    node.insert("rect", "text")
+        .attr("class", "node-label-background")
+        .attr("rx", 4)
+        .attr("ry", 4);
+
+    // Set rect dimensions based on text
+    node.each(function(d) {
+        const nodeGroup = d3.select(this);
+        const text = nodeGroup.select('text');
+        const rect = nodeGroup.select('rect');
+
+        const bbox = text.node().getBBox();
+        rect.attr('x', bbox.x - 4)
+            .attr('y', bbox.y - 2)
+            .attr('width', bbox.width + 8)
+            .attr('height', bbox.height + 4);
+    });
 
     root.children.forEach(collapseNode);
     update(root);
@@ -84,6 +92,7 @@ function update(source) {
 
     node = node.data(nodes, d => d.id);
     node.exit().remove();
+
     let nodeEnter = node.enter().append("g")
         .attr("class", "node")
         .on("click", toggleNode)
@@ -99,30 +108,37 @@ function update(source) {
         .attr("fill", d => colorScale(d.depth))
         .style("filter", d => d.depth === 0 ? "url(#drop-shadow)" : null)
         .style("stroke", getBorderColor)
-        .style("stroke-width", 3);
+        .style("stroke-width", 2);
 
-    nodeEnter.append("rect")
-        .attr("class", "node-label-background")
-        .attr("rx", 5)
-        .attr("ry", 5);
-
+    // Append text first
     nodeEnter.append("text")
         .attr("class", "node-label")
         .attr("dy", ".31em")
         .attr("text-anchor", "middle")
         .text(d => d.data.name)
-        .style("font-size", d => `${Math.max(8, 16 - d.depth * 2)}px`)
+        .style("font-size", d => `${Math.max(10, 16 - d.depth * 2)}px`)
         .style("fill-opacity", 0)
         .transition().duration(750)
-        .style("fill-opacity", 1)
-        .each(function(d) {
-            const bbox = this.getBBox();
-            d3.select(this.previousSibling)
-                .attr("x", bbox.x - 5)
-                .attr("y", bbox.y - 2)
-                .attr("width", bbox.width + 10)
-                .attr("height", bbox.height + 4);
-        });
+        .style("fill-opacity", 1);
+
+    // Insert rect before text
+    nodeEnter.insert("rect", "text")
+        .attr("class", "node-label-background")
+        .attr("rx", 4)
+        .attr("ry", 4);
+
+    // Set rect dimensions based on text
+    nodeEnter.each(function(d) {
+        const nodeGroup = d3.select(this);
+        const text = nodeGroup.select('text');
+        const rect = nodeGroup.select('rect');
+
+        const bbox = text.node().getBBox();
+        rect.attr('x', bbox.x - 4)
+            .attr('y', bbox.y - 2)
+            .attr('width', bbox.width + 8)
+            .attr('height', bbox.height + 4);
+    });
 
     node = nodeEnter.merge(node);
 
@@ -131,10 +147,10 @@ function update(source) {
         .attr("fill", d => colorScale(d.depth))
         .style("filter", d => d.depth === 0 ? "url(#drop-shadow)" : null)
         .style("stroke", getBorderColor)
-        .style("stroke-width", 3);
+        .style("stroke-width", 2);
 
     node.select("text")
-        .style("font-size", d => `${Math.max(8, 16 - d.depth * 2)}px`);
+        .style("font-size", d => `${Math.max(10, 16 - d.depth * 2)}px`);
 
     simulation.alpha(1).restart();
 }
