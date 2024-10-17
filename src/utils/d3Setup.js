@@ -30,8 +30,7 @@ feMerge.append("feMergeNode")
 feMerge.append("feMergeNode")
     .attr("in", "SourceGraphic");
 
-const g = svg.append("g")
-    .attr("transform", `translate(${width / 2},${height / 2})`);
+const g = svg.append("g");
 
 const zoom = d3.zoom()
     .scaleExtent([0.1, 3])
@@ -39,6 +38,11 @@ const zoom = d3.zoom()
         g.attr("transform", event.transform);
     });
 
+// Initialize the zoom transform
+const initialTransform = d3.zoomIdentity.translate(width / 2, height / 2);
+svg.call(zoom.transform, initialTransform);
+
+// Apply zoom behavior after setting the initial transform
 svg.call(zoom);
 
 const colorScale = d3.scaleSequential(d3.interpolateYlGnBu)
