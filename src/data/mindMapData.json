@@ -1,4 +1,4 @@
-const mindMapData = {
+{
     "name": "Web Development",
     "children": [
         {
@@ -135,4 +135,4 @@ const mindMapData = {
             ]
         }
     ]
-};
+}
